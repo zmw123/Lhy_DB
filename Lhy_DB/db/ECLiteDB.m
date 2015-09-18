@@ -23,14 +23,11 @@ static NSString* const Attribute_Unique      =   @"UNIQUE";
 static NSString* const Attribute_Check       =   @"CHECK";
 static NSString* const Attribute_ForeignKey  =   @"FOREIGN KEY";
 
-//static char Base_Key_RowID;
 static NSString *tableName;
 static NSArray *primaryKey;
 static NSArray *coloumns;
 @interface ECLiteDB()
-//@property (strong, nonatomic) NSString *tableName;
-//@property (strong, nonatomic) NSArray *primaryKey;
-//@property (strong, nonatomic) NSArray *coloumns;
+
 @end
 
 @implementation ECLiteDB
