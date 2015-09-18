@@ -190,23 +190,27 @@ static NSArray *coloumns;
     {
         ECLiteColoumn *property = [coloumns objectAtIndex:i];
         
-        if (insertKey.length > 0)
-        {
-            [insertKey appendString:@","];
-            [insertValuesString appendString:@","];
-        }
-        
-        [insertKey appendString:property.sqlColumnName];
-        [insertValuesString appendString:@"?"];
-        
+        id oneValues = nil;
         if (property.sqlColumnType == SqlTypeBlob)
         {
-            NSData *data = [NSKeyedArchiver archivedDataWithRootObject:[object valueForKey:property.propertyName]];
-            [insertValues addObject:data];
+            oneValues = [NSKeyedArchiver archivedDataWithRootObject:[object valueForKey:property.propertyName]];
         }
         else
         {
-            [insertValues addObject:[object valueForKey:property.propertyName]];
+            oneValues = [object valueForKey:property.propertyName];
+        }
+        
+        if (oneValues)
+        {
+            if (insertKey.length > 0)
+            {
+                [insertKey appendString:@","];
+                [insertValuesString appendString:@","];
+            }
+            
+            [insertKey appendString:property.sqlColumnName];
+            [insertValuesString appendString:@"?"];
+            [insertValues addObject:oneValues];
         }
     }
     
@@ -219,8 +223,8 @@ static NSArray *coloumns;
 {
     NSArray *argu = [[self class] insertSql:self];
     // 拼接insertSQL 语句
-    NSString *insertSQL = [argu firstObject];
-    NSArray *insertValues = [argu lastObject];
+    NSString *insertSQL = [argu lastObject];
+    NSArray *insertValues = [argu firstObject];
     
     __block BOOL success;
     
@@ -382,5 +386,19 @@ static NSArray *coloumns;
     }];
     
     return objects;
+}
+
++(BOOL)removeRepeat:(NSString *)keyName
+{
+    __block BOOL success;
+    [[ECLiteDatabase instance].dbQueue inDatabase:^(FMDatabase *db) {
+        NSString *sql = [NSString stringWithFormat:@"DELETE FROM %@ WHERE %@ IN (SELECT %@ FROM %@ GROUP BY %@ HAVING count(%@) > 1) AND rowid NOT IN (SELECT max(rowid) FROM %@ GROUP BY %@ HAVING count(%@) > 1)", tableName, keyName, keyName, tableName, keyName, keyName, tableName, keyName, keyName];
+        success = [db executeUpdate:sql];
+        if (!success)
+        {
+            NSLog(@"插入crm失败");
+        }
+    }];
+    return success;
 }
 @end

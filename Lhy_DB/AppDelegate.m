@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "ECLiteDBApp.h"
 
 @interface AppDelegate ()
 
@@ -17,6 +18,22 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    
+    [ECLiteDBApp createTable];
+    
+    ECLiteDBApp *app = [[ECLiteDBApp alloc] init];
+    app.lastUserID = 10;
+    [app insert];
+    
+    [app insert];
+    
+    [app remove];
+    
+    [app insert];
+    
+    [ECLiteDBApp removeRepeat:app_lastUserID];
+    
+    
     return YES;
 }
 

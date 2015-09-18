@@ -23,6 +23,7 @@
 		E9870F7F1BABF08B00BF4EB8 /* FMDatabaseQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = E9870F751BABF08B00BF4EB8 /* FMDatabaseQueue.m */; };
 		E9870F801BABF08B00BF4EB8 /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = E9870F781BABF08B00BF4EB8 /* FMResultSet.m */; };
 		E9870F871BABFF0700BF4EB8 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E9870F861BABFF0700BF4EB8 /* libsqlite3.dylib */; };
+		E9870F8A1BAC023900BF4EB8 /* ECLiteDBApp.m in Sources */ = {isa = PBXBuildFile; fileRef = E9870F891BAC023900BF4EB8 /* ECLiteDBApp.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,6 +68,8 @@
 		E9870F771BABF08B00BF4EB8 /* FMResultSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMResultSet.h; sourceTree = "<group>"; };
 		E9870F781BABF08B00BF4EB8 /* FMResultSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMResultSet.m; sourceTree = "<group>"; };
 		E9870F861BABFF0700BF4EB8 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
+		E9870F881BAC023900BF4EB8 /* ECLiteDBApp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECLiteDBApp.h; sourceTree = "<group>"; };
+		E9870F891BAC023900BF4EB8 /* ECLiteDBApp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECLiteDBApp.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,6 +116,8 @@
 				E9870F661BABF08B00BF4EB8 /* db */,
 				E9870F441BABF02900BF4EB8 /* AppDelegate.h */,
 				E9870F451BABF02900BF4EB8 /* AppDelegate.m */,
+				E9870F881BAC023900BF4EB8 /* ECLiteDBApp.h */,
+				E9870F891BAC023900BF4EB8 /* ECLiteDBApp.m */,
 				E9870F471BABF02900BF4EB8 /* ViewController.h */,
 				E9870F481BABF02900BF4EB8 /* ViewController.m */,
 				E9870F4A1BABF02900BF4EB8 /* Main.storyboard */,
@@ -282,6 +287,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E9870F491BABF02900BF4EB8 /* ViewController.m in Sources */,
+				E9870F8A1BAC023900BF4EB8 /* ECLiteDBApp.m in Sources */,
 				E9870F791BABF08B00BF4EB8 /* ECLiteColoumn.m in Sources */,
 				E9870F461BABF02900BF4EB8 /* AppDelegate.m in Sources */,
 				E9870F7C1BABF08B00BF4EB8 /* FMDatabase.m in Sources */,

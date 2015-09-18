@@ -72,4 +72,12 @@
  */
 + (NSArray *)dbWithSqlWhere:(NSString *)sql;
 
+/**
+ *  根据指定列删除重复数据
+ *
+ *  @param keyName 制定的列
+ *
+ *  @return 删除的列
+ */
++ (BOOL)removeRepeat:(NSString *)keyName;
 @end
