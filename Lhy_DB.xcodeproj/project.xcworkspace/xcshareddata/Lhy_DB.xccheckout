@@ -7,14 +7,14 @@
 	<key>IDESourceControlProjectIdentifier</key>
 	<string>C3294702-1B57-454F-8B81-D0C8F572E57F</string>
 	<key>IDESourceControlProjectName</key>
-	<string>project</string>
+	<string>Lhy_DB</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>82C046FD93F7EEF52A358EB6146E46F3A7BC27C8</key>
 		<string>https://github.com/zmw123/Lhy_DB.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>Lhy_DB.xcodeproj/project.xcworkspace</string>
+	<string>Lhy_DB.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>82C046FD93F7EEF52A358EB6146E46F3A7BC27C8</key>

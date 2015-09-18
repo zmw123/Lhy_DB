@@ -22,6 +22,7 @@
 		E9870F7E1BABF08B00BF4EB8 /* FMDatabasePool.m in Sources */ = {isa = PBXBuildFile; fileRef = E9870F731BABF08B00BF4EB8 /* FMDatabasePool.m */; };
 		E9870F7F1BABF08B00BF4EB8 /* FMDatabaseQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = E9870F751BABF08B00BF4EB8 /* FMDatabaseQueue.m */; };
 		E9870F801BABF08B00BF4EB8 /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = E9870F781BABF08B00BF4EB8 /* FMResultSet.m */; };
+		E9870F871BABFF0700BF4EB8 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E9870F861BABFF0700BF4EB8 /* libsqlite3.dylib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,6 +66,7 @@
 		E9870F761BABF08B00BF4EB8 /* FMDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDB.h; sourceTree = "<group>"; };
 		E9870F771BABF08B00BF4EB8 /* FMResultSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMResultSet.h; sourceTree = "<group>"; };
 		E9870F781BABF08B00BF4EB8 /* FMResultSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMResultSet.m; sourceTree = "<group>"; };
+		E9870F861BABFF0700BF4EB8 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,6 +74,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E9870F871BABFF0700BF4EB8 /* libsqlite3.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -88,6 +91,7 @@
 		E9870F341BABF02900BF4EB8 = {
 			isa = PBXGroup;
 			children = (
+				E9870F861BABFF0700BF4EB8 /* libsqlite3.dylib */,
 				E9870F3F1BABF02900BF4EB8 /* Lhy_DB */,
 				E9870F591BABF02900BF4EB8 /* Lhy_DBTests */,
 				E9870F3E1BABF02900BF4EB8 /* Products */,
@@ -482,6 +486,7 @@
 				E9870F621BABF02900BF4EB8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		E9870F631BABF02900BF4EB8 /* Build configuration list for PBXNativeTarget "Lhy_DBTests" */ = {
 			isa = XCConfigurationList;
@@ -490,6 +495,7 @@
 				E9870F651BABF02900BF4EB8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
