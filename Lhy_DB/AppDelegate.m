@@ -22,7 +22,20 @@
     [ECLiteDBApp createTable];
     
     ECLiteDBApp *app = [[ECLiteDBApp alloc] init];
-    app.lastUserID = 10;
+    app.str = @"str";
+    app.array = @[@10];
+    app.dic = @{@"key":@"value"};
+    app.dou = 1.00;
+    app.point = CGPointMake(100, 100);
+    
+    
+    ECLiteDBApp *copyApp = [app copy];
+    
+    copyApp.array = nil;
+    copyApp.point = CGPointMake(10, 12);
+    NSLog(@"%@", copyApp);
+    
+    
     [app insert];
     
     [app insert];
@@ -31,8 +44,10 @@
     
     [app insert];
     
-    [ECLiteDBApp removeRepeat:app_lastUserID];
+    [ECLiteDBApp removeRepeat:@"str"];
     
+    NSArray *data = [ECLiteDBApp dbWithSqlWhere:nil];
+    NSLog(@"%@", data);
     
     return YES;
 }

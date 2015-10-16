@@ -10,7 +10,7 @@
 #import "ECLiteColoumn.h"
 #import "ECLiteDatabase.h"
 
-@interface ECLiteDB : NSObject
+@interface ECLiteDB : NSObject<NSCopying>
 
 @property (readonly, nonatomic) NSInteger rowID;//默认加上的自增id
 

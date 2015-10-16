@@ -13,7 +13,7 @@
 #define ECLiteDB_App   @"App"
 
 @implementation ECLiteDBApp
-
+/*
 - (id)copyWithZone:(NSZone *)zone
 {
     ECLiteDBApp *copyApp = [[ECLiteDBApp allocWithZone:zone] init];
@@ -51,4 +51,5 @@
     
     return cols;
 }
+ */
 @end
