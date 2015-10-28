@@ -28,6 +28,7 @@
     app.dou = 1.00;
     app.point = CGPointMake(100, 100);
     
+    [app insert];
     
     ECLiteDBApp *copyApp = [app copy];
     
@@ -36,18 +37,24 @@
     NSLog(@"%@", copyApp);
     
     
-    [app insert];
+//    [app insert];
+//    
+//    [app insert];
+//    
+//    [app remove];
+//    
+//    [app insert];
     
-    [app insert];
-    
-    [app remove];
-    
-    [app insert];
-    
-    [ECLiteDBApp removeRepeat:@"str"];
+//    [ECLiteDBApp removeRepeat:@"str"];
     
     NSArray *data = [ECLiteDBApp dbWithSqlWhere:nil];
     NSLog(@"%@", data);
+    
+    [copyApp update:^BOOL{
+        return YES;
+    }];
+    
+    
     
     return YES;
 }

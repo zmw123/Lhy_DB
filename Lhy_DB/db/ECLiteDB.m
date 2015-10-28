@@ -387,101 +387,126 @@ static NSArray *coloumns;
     return success;
 }
 
-- (BOOL)update
+- (BOOL)update:(BOOL (^)(void))block
 {
-    NSMutableString *updateKey = [NSMutableString string];
-    NSMutableArray *updateValues = [NSMutableArray arrayWithCapacity:coloumns.count];
-    
-    for (NSInteger i = 0; i < coloumns.count; i++)
+    if (self.rowID == 0)
     {
-        ECLiteColoumn *property = [coloumns objectAtIndex:i];
-        
-        if (updateKey.length > 0)
+        BOOL result = block();
+        if (result)
         {
-            [updateKey appendString:@","];
+            result = [self insert];
         }
-        
-        [updateKey appendFormat:@"%@=?", property.sqlColumnName];
-        
-        [updateValues addObject:[self valueForKey:property.propertyName]];
+        return  result;
     }
-    
-    NSMutableString *updateSQL = [NSMutableString stringWithFormat:@"update %@ set %@", tableName, updateKey];
-    
-    if (primaryKey.count > 0)
+    else
     {
-        [updateSQL appendString:@" where "];
+        
+        NSMutableString *updateKey = [NSMutableString string];
+        NSMutableArray *updateValues = [NSMutableArray arrayWithCapacity:coloumns.count];
+        
+        for (NSInteger i = 0; i < coloumns.count; i++)
+        {
+            ECLiteColoumn *property = [coloumns objectAtIndex:i];
+            
+            if (updateKey.length > 0)
+            {
+                [updateKey appendString:@","];
+            }
+            
+            [updateKey appendFormat:@"%@=?", property.sqlColumnName];
+            
+            [updateValues addObject:[self valueForKey:property.propertyName]];
+        }
+        
+        NSMutableString *updateSQL = [NSMutableString stringWithFormat:@"update %@ set %@", tableName, updateKey];
+        
+        if (primaryKey.count > 0)
+        {
+            [updateSQL appendString:@" where "];
+        }
+        // 添加where 语句
+        for (NSInteger i = 0; i < primaryKey.count; i++)
+        {
+            ECLiteColoumn *property = [primaryKey objectAtIndex:i];
+            
+            if (i > 0)
+            {
+                [updateSQL appendString:@" AND "];
+            }
+            
+            [updateSQL appendFormat:@" %@ = ?", property.sqlColumnName];
+            
+            [updateValues addObject:[self valueForKey:property.propertyName]];
+        }
+        
+        __block BOOL success;
+        [[ECLiteDatabase instance].dbQueue inDatabase:^(FMDatabase *db) {
+            
+            if (updateValues.count > 0)
+            {
+                success = [db executeUpdate:updateSQL withArgumentsInArray:updateValues];
+            }
+            else
+            {
+                success = [db executeUpdate:updateSQL];
+            }
+        }];
+        
+        return success;
     }
-    // 添加where 语句
-    for (NSInteger i = 0; i < primaryKey.count; i++)
-    {
-        ECLiteColoumn *property = [primaryKey objectAtIndex:i];
-        
-        
-        if (i > 0)
-        {
-            [updateSQL appendString:@" AND "];
-        }
-        
-        [updateSQL appendFormat:@" %@ = ?", property.sqlColumnName];
-        
-        [updateValues addObject:[self valueForKey:property.propertyName]];
-    }
-    
-    __block BOOL success;
-    [[ECLiteDatabase instance].dbQueue inDatabase:^(FMDatabase *db) {
-        
-        if (updateValues.count > 0)
-        {
-            success = [db executeUpdate:updateSQL withArgumentsInArray:updateValues];
-        }
-        else
-        {
-            success = [db executeUpdate:updateSQL];
-        }
-    }];
-    
-    return success;
 }
 
 - (BOOL)remove
 {
-    NSMutableString *deleteSQL = [NSMutableString stringWithFormat:@"delete from %@ ", tableName];
-    
-    if (primaryKey.count > 0)
+    if (self.rowID == 0)
     {
-        [deleteSQL appendString:@" where "];
+        return YES;
+        
+        
+        
+        
+        
+        
     }
-    // 添加where 语句
-    NSMutableArray *updateWhereValue = [NSMutableArray array];
-    for (NSInteger i = 0; i < primaryKey.count; i++)
+    else
     {
-        ECLiteColoumn *property = [primaryKey objectAtIndex:i];
+        NSMutableString *deleteSQL = [NSMutableString stringWithFormat:@"delete from %@ ", tableName];
         
-        if (i > 0)
+        if (primaryKey.count > 0)
         {
-            [deleteSQL appendString:@" AND "];
+            [deleteSQL appendString:@" where "];
+        }
+        // 添加where 语句
+        NSMutableArray *updateWhereValue = [NSMutableArray array];
+        for (NSInteger i = 0; i < primaryKey.count; i++)
+        {
+            ECLiteColoumn *property = [primaryKey objectAtIndex:i];
+            
+            if (i > 0)
+            {
+                [deleteSQL appendString:@" AND "];
+            }
+            
+            [deleteSQL appendFormat:@" %@ = ?", property.sqlColumnName];
+            
+            [updateWhereValue addObject:[self valueForKey:property.propertyName]];
         }
         
-        [deleteSQL appendFormat:@" %@ = ?", property.sqlColumnName];
+        __block BOOL success;
+        [[ECLiteDatabase instance].dbQueue inDatabase:^(FMDatabase *db) {
+            
+            if (updateWhereValue.count > 0)
+            {
+                success = [db executeUpdate:deleteSQL withArgumentsInArray:updateWhereValue];
+            }
+            else
+            {
+                success = [db executeUpdate:deleteSQL];
+            }
+        }];
         
-        [updateWhereValue addObject:[self valueForKey:property.propertyName]];
+        return success;
     }
-    
-    __block BOOL success;
-    [[ECLiteDatabase instance].dbQueue inDatabase:^(FMDatabase *db) {
-        
-        if (updateWhereValue.count > 0)
-        {
-            success = [db executeUpdate:deleteSQL withArgumentsInArray:updateWhereValue];
-        }
-        else
-        {
-            success = [db executeUpdate:deleteSQL];
-        }
-    }];
-    
-    return success;
 }
 
 + (NSArray *)dbWithSqlWhere:(NSString *)sql

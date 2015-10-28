@@ -51,6 +51,7 @@ static ECLiteDatabase *instance = nil;
         }
         _dbPath = [applicationSupportDirectory stringByAppendingPathComponent:@"ECLite.sqlite"];
     }
+    NSLog(@"dbPath:%@", _dbPath);
     return _dbPath;
 }
 

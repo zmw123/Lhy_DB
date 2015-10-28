@@ -59,9 +59,11 @@
 /**
  *  更新数据库(主键不会更新,根据主键来更新)
  *
+ *  @param block 是否插入数据库(防止自己生成的数据没有主键，有主键的不会回调闭包)
+ *
  *  @return 操作结果
  */
-- (BOOL)update;
+- (BOOL)update:(BOOL(^)(void))block;
 
 /**
  *  查询
